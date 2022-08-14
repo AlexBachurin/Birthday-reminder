@@ -20,7 +20,12 @@ const LoginPage = () => {
 					</button>
 				</div>
 			</Wrapper>
-			{showModal ? <AuthForm handleLoginClick={handleLoginClick} /> : null}
+			{showModal ? (
+				<AuthForm
+					handleLoginClick={handleLoginClick}
+					setShowModal={setShowModal}
+				/>
+			) : null}
 		</div>
 	);
 };
