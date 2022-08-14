@@ -1,9 +1,11 @@
 import React from "react";
-import { signInWithGooglePopUp } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { loginUserWithGoogle } from "../../features/user/userSlice";
 import { Wrapper } from "./Wrapper";
 const LoginPage = () => {
+	const dispatch = useDispatch();
 	const handleLogin = () => {
-		signInWithGooglePopUp();
+		dispatch(loginUserWithGoogle());
 	};
 	return (
 		<Wrapper>
