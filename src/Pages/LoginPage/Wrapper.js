@@ -3,8 +3,9 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	padding: 15px 15px;
+	justify-content: space-around;
+	padding: 0;
+	margin: 0;
 	width: 90vw;
 	max-width: 640px;
 	margin: 0 auto;
@@ -25,5 +26,6 @@ export const Wrapper = styled.div`
 		border-radius: 10px;
 		outline: none;
 		margin: 0 auto;
+		margin-bottom: 50px;
 	}
 `;
