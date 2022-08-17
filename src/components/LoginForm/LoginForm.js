@@ -5,11 +5,14 @@ import "antd/dist/antd.css";
 import { Wrapper } from "./Wrapper";
 import { useDispatch } from "react-redux";
 import { signInWithEmailAndPassword } from "../../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
 const LoginForm = ({ setShowLogin }) => {
 	const dispatch = useDispatch();
+	let navigate = useNavigate();
 	const onFinish = (values) => {
 		// console.log("Received values of form: ", values);
 		dispatch(signInWithEmailAndPassword(values));
+		navigate("/");
 	};
 	return (
 		<Wrapper>
