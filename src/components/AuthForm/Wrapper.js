@@ -16,7 +16,6 @@ export const Wrapper = styled.div`
 		padding: 20px 20px;
 		padding-top: 40px;
 		margin: 0 auto;
-		height: 440px;
 		background-color: #fff;
 		.close-btn {
 			position: absolute;

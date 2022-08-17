@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginForm from "../LoginForm/LoginForm";
+import RegisterForm from "../RegisterForm/RegisterForm";
 import { Wrapper } from "./Wrapper";
 
 const AuthForm = ({ handleLoginClick, setShowModal }) => {
+	const [showLogin, setShowLogin] = useState(true);
 	return (
 		<Wrapper onClick={() => setShowModal(false)}>
 			<div
@@ -12,7 +14,11 @@ const AuthForm = ({ handleLoginClick, setShowModal }) => {
 				}}
 				className="form-container"
 			>
-				<LoginForm />
+				{showLogin ? (
+					<LoginForm setShowLogin={setShowLogin} />
+				) : (
+					<RegisterForm setShowLogin={setShowLogin} />
+				)}
 				<div onClick={handleLoginClick} className="close-btn">
 					&#10005;
 				</div>

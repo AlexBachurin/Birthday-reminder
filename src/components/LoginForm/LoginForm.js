@@ -3,12 +3,13 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import "antd/dist/antd.css";
 import { Wrapper } from "./Wrapper";
-const LoginForm = () => {
+const LoginForm = ({ setShowLogin }) => {
 	const onFinish = (values) => {
 		console.log("Received values of form: ", values);
 	};
 	return (
 		<Wrapper>
+			<h2 className="title">Login</h2>
 			<Form
 				name="normal_login"
 				className="login-form"
@@ -57,7 +58,11 @@ const LoginForm = () => {
 						Log in
 					</Button>{" "}
 					Or{" "}
-					<button type="button" className="register-btn">
+					<button
+						onClick={() => setShowLogin(false)}
+						type="button"
+						className="register-btn"
+					>
 						register now!
 					</button>
 				</Form.Item>

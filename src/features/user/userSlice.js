@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { signInWithGooglePopUp } from "../../firebase";
-import { loginUserWithGoogleThunk } from "./userThunk";
+import {
+	createUserWithEmailAndPasswordThunk,
+	loginUserWithGoogleThunk,
+} from "./userThunk";
 
 const initialState = {
 	isLoading: false,
@@ -11,6 +13,11 @@ const initialState = {
 export const loginUserWithGoogle = createAsyncThunk(
 	"user/loginUser",
 	loginUserWithGoogleThunk
+);
+
+export const createUserWithEmailAndPassword = createAsyncThunk(
+	"user/registerUser",
+	createUserWithEmailAndPasswordThunk
 );
 
 export const userSlice = createSlice({
@@ -24,8 +31,21 @@ export const userSlice = createSlice({
 		[loginUserWithGoogle.fulfilled]: (state, action) => {
 			state.user = action.payload;
 			state.isLoading = false;
+			alert(`hello ${action.payload.displayName}`);
 		},
 		[loginUserWithGoogle.rejected]: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		},
+		[createUserWithEmailAndPassword.pending]: (state) => {
+			state.isLoading = true;
+		},
+		[createUserWithEmailAndPassword.fulfilled]: (state, action) => {
+			state.user = action.payload;
+			state.isLoading = false;
+			alert(`hello ${action.payload.displayName}`);
+		},
+		[createUserWithEmailAndPassword.rejected]: (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
 		},

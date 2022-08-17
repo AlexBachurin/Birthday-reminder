@@ -78,3 +78,10 @@ ul {
 .loginPage-container {
 	position: relative;
 }
+.register-btn {
+	border: none;
+	outline: none;
+	background: transparent;
+	color: blue;
+	cursor: pointer;
+}
