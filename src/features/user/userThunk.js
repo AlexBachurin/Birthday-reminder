@@ -3,6 +3,7 @@ import {
 	signInWithPopup,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
+	updateProfile,
 } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import { app } from "../../firebase";
@@ -23,8 +24,13 @@ export const createUserWithEmailAndPasswordThunk = async (values, thunkAPI) => {
 		const { username, email, password } = values;
 		const res = await createUserWithEmailAndPassword(auth, email, password);
 		const user = res.user;
-		user.displayName = username;
-		return user;
+		//if we getting back user update it immediately with provided username
+		if (user) {
+			await updateProfile(user, {
+				displayName: username,
+			});
+		}
+		return user.providerData[0];
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.code);
 	}
@@ -34,7 +40,8 @@ export const signInWithEmailAndPasswordThunk = async (values, thunkAPI) => {
 	try {
 		const { email, password } = values;
 		const res = await signInWithEmailAndPassword(auth, email, password);
-		return res.user;
+		console.log(res.user.providerData[0]);
+		return res.user.providerData[0];
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.code);
 	}
