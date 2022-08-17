@@ -2,6 +2,7 @@ import {
 	GoogleAuthProvider,
 	signInWithPopup,
 	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
 } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import { app } from "../../firebase";
@@ -24,6 +25,16 @@ export const createUserWithEmailAndPasswordThunk = async (values, thunkAPI) => {
 		const user = res.user;
 		user.displayName = username;
 		return user;
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error.code);
+	}
+};
+
+export const signInWithEmailAndPasswordThunk = async (values, thunkAPI) => {
+	try {
+		const { email, password } = values;
+		const res = await signInWithEmailAndPassword(auth, email, password);
+		return res.user;
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.code);
 	}

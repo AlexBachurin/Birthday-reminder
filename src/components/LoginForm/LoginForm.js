@@ -3,9 +3,13 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import "antd/dist/antd.css";
 import { Wrapper } from "./Wrapper";
+import { useDispatch } from "react-redux";
+import { signInWithEmailAndPassword } from "../../features/user/userSlice";
 const LoginForm = ({ setShowLogin }) => {
+	const dispatch = useDispatch();
 	const onFinish = (values) => {
-		console.log("Received values of form: ", values);
+		// console.log("Received values of form: ", values);
+		dispatch(signInWithEmailAndPassword(values));
 	};
 	return (
 		<Wrapper>

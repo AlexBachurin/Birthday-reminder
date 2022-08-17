@@ -9,7 +9,7 @@ import { createUserWithEmailAndPassword } from "../../features/user/userSlice";
 const RegisterForm = ({ setShowLogin }) => {
 	const dispatch = useDispatch();
 	const onFinish = (values) => {
-		console.log("Received values of form: ", values);
+		// console.log("Received values of form: ", values);
 		dispatch(createUserWithEmailAndPassword(values));
 	};
 	return (

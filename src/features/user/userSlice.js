@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
 	createUserWithEmailAndPasswordThunk,
 	loginUserWithGoogleThunk,
+	signInWithEmailAndPasswordThunk,
 } from "./userThunk";
 
 const initialState = {
@@ -20,6 +21,11 @@ export const createUserWithEmailAndPassword = createAsyncThunk(
 	createUserWithEmailAndPasswordThunk
 );
 
+export const signInWithEmailAndPassword = createAsyncThunk(
+	"user/signInWithEmail",
+	signInWithEmailAndPasswordThunk
+);
+
 export const userSlice = createSlice({
 	name: "user",
 	initialState,
@@ -36,6 +42,7 @@ export const userSlice = createSlice({
 		[loginUserWithGoogle.rejected]: (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
+			alert(`Error: ${action.payload}`);
 		},
 		[createUserWithEmailAndPassword.pending]: (state) => {
 			state.isLoading = true;
@@ -48,6 +55,20 @@ export const userSlice = createSlice({
 		[createUserWithEmailAndPassword.rejected]: (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
+			alert(`Error: ${action.payload}`);
+		},
+		[signInWithEmailAndPassword.pending]: (state) => {
+			state.isLoading = true;
+		},
+		[signInWithEmailAndPassword.fulfilled]: (state, action) => {
+			state.isLoading = false;
+			state.user = action.payload;
+			alert(`hello ${action.payload.displayName}`);
+		},
+		[signInWithEmailAndPassword.rejected]: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+			alert(`Error: ${action.payload}`);
 		},
 	},
 });
