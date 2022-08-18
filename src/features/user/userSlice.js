@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+	addUserToLocalStorage,
+	getUserFromLocalStorage,
+	removeUserFromLocalStorage,
+} from "../../utils/localStorage";
+import {
 	createUserWithEmailAndPasswordThunk,
 	loginUserWithGoogleThunk,
 	signInWithEmailAndPasswordThunk,
@@ -8,7 +13,8 @@ import {
 
 const initialState = {
 	isLoading: false,
-	user: null,
+	//get user from localstorage on app reload to persist user after page reload
+	user: getUserFromLocalStorage(),
 	error: null,
 };
 
@@ -32,6 +38,11 @@ export const signOutUser = createAsyncThunk(
 	signOutUserThunk
 );
 
+// export const checkAuthSession = createAsyncThunk(
+// 	"user/checkAuthSession",
+// 	checkAuthSessionThunk
+// );
+
 export const userSlice = createSlice({
 	name: "user",
 	initialState,
@@ -43,6 +54,7 @@ export const userSlice = createSlice({
 		[loginUserWithGoogle.fulfilled]: (state, action) => {
 			state.user = action.payload;
 			state.isLoading = false;
+			addUserToLocalStorage(action.payload);
 			alert(`hello ${action.payload.displayName}`);
 		},
 		[loginUserWithGoogle.rejected]: (state, action) => {
@@ -55,6 +67,7 @@ export const userSlice = createSlice({
 		},
 		[createUserWithEmailAndPassword.fulfilled]: (state, action) => {
 			state.user = action.payload;
+			addUserToLocalStorage(action.payload);
 			state.isLoading = false;
 			alert(`hello ${action.payload.displayName}`);
 		},
@@ -68,6 +81,7 @@ export const userSlice = createSlice({
 		},
 		[signInWithEmailAndPassword.fulfilled]: (state, action) => {
 			state.isLoading = false;
+			addUserToLocalStorage(action.payload);
 			state.user = action.payload;
 			alert(`hello ${action.payload.displayName}`);
 		},
@@ -81,12 +95,24 @@ export const userSlice = createSlice({
 		},
 		[signOutUser.fulfilled]: (state, action) => {
 			state.user = null;
+			removeUserFromLocalStorage();
 			state.isLoading = false;
 		},
 		[signOutUser.rejected]: (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
 		},
+		// [checkAuthSession.pending]: (state) => {
+		// 	state.isLoading = true;
+		// },
+		// [checkAuthSession.fulfilled]: (state, action) => {
+		// 	state.isLoading = false;
+		// 	state.user = action.payload;
+		// },
+		// [checkAuthSession.rejected]: (state, action) => {
+		// 	state.isLoading = false;
+		// 	state.error = action.payload;
+		// },
 	},
 });
 

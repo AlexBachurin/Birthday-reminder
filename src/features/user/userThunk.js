@@ -9,7 +9,7 @@ import {
 import { getAuth } from "firebase/auth";
 import { app } from "../../firebase";
 const google_provider = new GoogleAuthProvider();
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 //login with google
 export const loginUserWithGoogleThunk = async (_, thunkAPI) => {
@@ -43,7 +43,6 @@ export const signInWithEmailAndPasswordThunk = async (values, thunkAPI) => {
 	try {
 		const { email, password } = values;
 		const res = await signInWithEmailAndPassword(auth, email, password);
-		console.log(res.user.providerData[0]);
 		return res.user.providerData[0];
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.code);

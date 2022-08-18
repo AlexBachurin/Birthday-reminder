@@ -7,6 +7,7 @@ import { signOutUser } from "../../features/user/userSlice";
 const Navbar = () => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const { user } = useSelector((store) => store.user);
+	console.log(user);
 	let navigate = useNavigate();
 	const dispatch = useDispatch();
 	const handleDropdownClick = () => {
@@ -36,7 +37,11 @@ const Navbar = () => {
 					{showDropdown ? (
 						<div className="profile-dropdown">
 							<i className="arrow up"></i>
-							<h4 className="profile-title">{`Welcome, ${user?.displayName}`}</h4>
+							{user?.isLoading ? (
+								`Loading...`
+							) : (
+								<h4 className="profile-title">{`Welcome, ${user?.displayName}`}</h4>
+							)}
 							<span>
 								<Link className="profile-link" to={"/profile"}>
 									<UserOutlined className="profile-icon" />
