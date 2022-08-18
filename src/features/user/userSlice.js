@@ -3,6 +3,7 @@ import {
 	createUserWithEmailAndPasswordThunk,
 	loginUserWithGoogleThunk,
 	signInWithEmailAndPasswordThunk,
+	signOutUserThunk,
 } from "./userThunk";
 
 const initialState = {
@@ -24,6 +25,11 @@ export const createUserWithEmailAndPassword = createAsyncThunk(
 export const signInWithEmailAndPassword = createAsyncThunk(
 	"user/signInWithEmail",
 	signInWithEmailAndPasswordThunk
+);
+
+export const signOutUser = createAsyncThunk(
+	"user/signOutUser",
+	signOutUserThunk
 );
 
 export const userSlice = createSlice({
@@ -69,6 +75,17 @@ export const userSlice = createSlice({
 			state.isLoading = false;
 			state.error = action.payload;
 			alert(`Error: ${action.payload}`);
+		},
+		[signOutUser.pending]: (state) => {
+			state.isLoading = false;
+		},
+		[signOutUser.fulfilled]: (state, action) => {
+			state.user = null;
+			state.isLoading = false;
+		},
+		[signOutUser.rejected]: (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
 		},
 	},
 });
