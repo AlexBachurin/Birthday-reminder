@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchBirthdaysThunk } from "./birthdaysThunk";
+import { fetchBirthdaysThunk, updateBirthdaysThunk } from "./birthdaysThunk";
 
 const initialState = {
 	loading: false,
@@ -11,6 +11,11 @@ const initialState = {
 export const fetchBirthdays = createAsyncThunk(
 	"birthdays/fetchBirthdays",
 	fetchBirthdaysThunk
+);
+//update birthdays
+export const updateBirthdaysArr = createAsyncThunk(
+	"birthdays/updateBirthdays",
+	updateBirthdaysThunk
 );
 
 export const birthdaySlice = createSlice({
@@ -26,6 +31,17 @@ export const birthdaySlice = createSlice({
 			state.birthdays = action.payload;
 		},
 		[fetchBirthdays.rejected]: (state, action) => {
+			state.loading = false;
+			state.error = action.payload;
+		},
+		[updateBirthdaysArr.pending]: (state) => {
+			state.loading = true;
+		},
+		[updateBirthdaysArr.fulfilled]: (state, action) => {
+			state.loading = false;
+			state.birthdays = action.payload;
+		},
+		[updateBirthdaysArr.rejected]: (state, action) => {
 			state.loading = false;
 			state.error = action.payload;
 		},

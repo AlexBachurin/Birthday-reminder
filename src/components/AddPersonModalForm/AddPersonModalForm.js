@@ -3,7 +3,8 @@ import { Button, DatePicker, Form, Input, Select } from "antd";
 import { Wrapper } from "./Wrapper";
 import { CloseOutlined } from "@ant-design/icons";
 import UploadButton from "../UploadButton/UploadButton";
-import { addNewBirthdayToDb } from "../../firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { updateBirthdaysArr } from "../../features/birthdays/birthdaysSlice";
 
 const { Option } = Select;
 
@@ -12,6 +13,8 @@ const AddPersonModalForm = ({ closeFormModal }) => {
 	const [birthdayError, setBirthdayError] = useState(false);
 	//state for person image
 	const [imageUrl, setImageUrl] = useState();
+	const dispatch = useDispatch();
+	const { user } = useSelector((store) => store.user);
 	//submit
 	const onFinish = (values) => {
 		if (!birthDate) {
@@ -29,7 +32,7 @@ const AddPersonModalForm = ({ closeFormModal }) => {
 				birthday: birthDate,
 			};
 			console.log(newUser);
-			addNewBirthdayToDb("1JTzvbJEETVd3e8PiWWMN06MdIv2", newUser);
+			dispatch(updateBirthdaysArr({ uid: user.uid, personObj: newUser }));
 		}
 	};
 
