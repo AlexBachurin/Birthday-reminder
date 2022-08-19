@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { Button, DatePicker, Form, Input, Select } from "antd";
 import { Wrapper } from "./Wrapper";
 import { CloseOutlined } from "@ant-design/icons";
+import UploadButton from "../UploadButton/UploadButton";
 
 const { Option } = Select;
 
 const AddPersonModalForm = ({ closeFormModal }) => {
 	const [birthDate, setBirthDate] = useState("");
 	const [birthdayError, setBirthdayError] = useState(false);
+	//state for person image
+	const [imageUrl, setImageUrl] = useState();
 	//submit
 	const onFinish = (values) => {
 		if (!birthDate) {
@@ -69,6 +72,9 @@ const AddPersonModalForm = ({ closeFormModal }) => {
 						<p className="date-error">
 							{birthdayError ? "Please enter date" : null}
 						</p>
+					</Form.Item>
+					<Form.Item label="Photo" className="upload-item">
+						<UploadButton imageUrl={imageUrl} setImageUrl={setImageUrl} />
 					</Form.Item>
 
 					<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
