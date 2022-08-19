@@ -18,6 +18,14 @@ const AddPersonModalForm = ({ closeFormModal }) => {
 			setBirthdayError(true);
 		} else {
 			console.log("Success:", values);
+			const { name, prefix, phone } = values;
+			const newUser = {
+				name,
+				phoneNumber: `+${prefix}${phone}`,
+				photo: imageUrl,
+				birthday: birthDate,
+			};
+			console.log(newUser);
 		}
 	};
 
