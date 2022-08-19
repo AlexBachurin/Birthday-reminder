@@ -1,21 +1,21 @@
+import { PhoneOutlined } from "@ant-design/icons";
 import React from "react";
+import { transformAge } from "../../utils/transformAge";
 import { Wrapper } from "./Wrapper";
-
-const Birthday = ({ age, name, photo, date, phone }) => {
+const Birthday = ({ name, photo, birthday, phoneNumber }) => {
 	return (
 		<Wrapper>
 			<div className="photo-container">
-				<img
-					src="https://res.cloudinary.com/dljezd6qv/image/upload/v1660756352/empty_user.png"
-					alt=""
-				/>
+				<img src={photo} alt="" />
 			</div>
 			<div className="person-info">
 				<p>{name}</p>
-				<p>{age}</p>
-				<p>{date}</p>
-				<p>{photo}</p>
-				<p>{phone}</p>
+				<p>{transformAge(birthday)}</p>
+				<p>{birthday}</p>
+				<p>
+					<PhoneOutlined />
+					{phoneNumber}
+				</p>
 			</div>
 		</Wrapper>
 	);

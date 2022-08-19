@@ -3,13 +3,15 @@ import styled from "styled-components";
 export const Wrapper = styled.article`
 	background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
 	.photo-container {
-		width: 60px;
+		width: 80px;
 		margin: 0 auto;
 		padding-top: 20px;
+
 		img {
 			width: 100%;
 			height: auto;
 			object-fit: cover;
+			border-radius: 15px;
 		}
 	}
 	.person-info {

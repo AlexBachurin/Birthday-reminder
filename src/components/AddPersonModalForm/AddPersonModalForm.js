@@ -3,6 +3,7 @@ import { Button, DatePicker, Form, Input, Select } from "antd";
 import { Wrapper } from "./Wrapper";
 import { CloseOutlined } from "@ant-design/icons";
 import UploadButton from "../UploadButton/UploadButton";
+import { addNewBirthdayToDb } from "../../firebase";
 
 const { Option } = Select;
 
@@ -22,10 +23,13 @@ const AddPersonModalForm = ({ closeFormModal }) => {
 			const newUser = {
 				name,
 				phoneNumber: `+${prefix}${phone}`,
-				photo: imageUrl,
+				photo: imageUrl
+					? imageUrl
+					: "https://res.cloudinary.com/dljezd6qv/image/upload/v1660756352/empty_user.png",
 				birthday: birthDate,
 			};
 			console.log(newUser);
+			addNewBirthdayToDb("1JTzvbJEETVd3e8PiWWMN06MdIv2", newUser);
 		}
 	};
 

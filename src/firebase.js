@@ -1,6 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+	getFirestore,
+	doc,
+	getDoc,
+	setDoc,
+	updateDoc,
+	arrayUnion,
+} from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -62,4 +69,14 @@ export const getDataFromDb = async (uid) => {
 		// doc.data() will be undefined in this case
 		return null;
 	}
+};
+
+//update array with provided info
+export const addNewBirthdayToDb = async (uid, personToAdd) => {
+	const birthdaysRef = doc(db, "users", uid);
+
+	//add provided person to birthdays arr
+	await updateDoc(birthdaysRef, {
+		birthdaysArr: arrayUnion(personToAdd),
+	});
 };
