@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, DatePicker, Form, Input, Select } from "antd";
 import { Wrapper } from "./Wrapper";
 import { CloseOutlined } from "@ant-design/icons";
@@ -34,6 +34,15 @@ const AddPersonModalForm = ({ closeFormModal }) => {
 			</Select>
 		</Form.Item>
 	);
+	//clear birthday error after 3 sec
+	useEffect(() => {
+		const timerId = setTimeout(() => {
+			setBirthdayError(false);
+		}, 3000);
+		return () => {
+			clearTimeout(timerId);
+		};
+	}, [birthdayError]);
 	return (
 		<Wrapper>
 			<div className="modal-content">
