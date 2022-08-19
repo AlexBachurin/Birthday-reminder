@@ -9,12 +9,17 @@ const MainPage = () => {
 	const openFormModal = () => {
 		setShowFormModal(true);
 	};
+	const closeFormModal = () => {
+		setShowFormModal(false);
+	};
 	return (
 		<Wrapper>
 			<Navbar />
 			{/* Content */}
 			<Birthdays openFormModal={openFormModal} />
-			{showFormModal ? <AddPersonModalForm /> : null}
+			{showFormModal ? (
+				<AddPersonModalForm closeFormModal={closeFormModal} />
+			) : null}
 		</Wrapper>
 	);
 };

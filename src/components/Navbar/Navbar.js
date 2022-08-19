@@ -7,7 +7,7 @@ import { signOutUser } from "../../features/user/userSlice";
 const Navbar = () => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const { user } = useSelector((store) => store.user);
-	console.log(user);
+
 	let navigate = useNavigate();
 	const dispatch = useDispatch();
 	const handleDropdownClick = () => {

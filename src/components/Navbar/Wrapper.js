@@ -37,6 +37,7 @@ export const Wrapper = styled.nav`
 			#bcbcbc 100%
 		);
 		/* height: 150px; */
+		z-index: 4;
 		padding: 10px 15px;
 		display: flex;
 		flex-direction: column;
