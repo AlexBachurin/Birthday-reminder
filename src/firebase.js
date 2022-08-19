@@ -49,3 +49,17 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 	//if user data exists
 	return userSnapshot;
 };
+
+//get data from firebase with provided user id
+export const getDataFromDb = async (uid) => {
+	//db - database, users-collection name, uid - document name
+	const docRef = doc(db, "users", uid);
+	const docSnap = await getDoc(docRef);
+
+	if (docSnap.exists()) {
+		return docSnap.data();
+	} else {
+		// doc.data() will be undefined in this case
+		return null;
+	}
+};
