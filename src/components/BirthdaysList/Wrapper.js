@@ -13,6 +13,7 @@ export const Wrapper = styled.section`
 			outline: none;
 			cursor: pointer;
 			background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+			transition: 0.3s ease-in-out all;
 			&:hover {
 				background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
 			}
@@ -22,5 +23,6 @@ export const Wrapper = styled.section`
 		margin-top: 40px;
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 20px;
 	}
 `;

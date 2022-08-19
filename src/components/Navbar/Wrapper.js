@@ -27,7 +27,15 @@ export const Wrapper = styled.nav`
 		position: absolute;
 		top: 68px;
 		right: 0;
-		background-color: #fff;
+		background-image: linear-gradient(
+			to top,
+			lightgrey 0%,
+			lightgrey 1%,
+			#e0e0e0 26%,
+			#efefef 48%,
+			#d9d9d9 75%,
+			#bcbcbc 100%
+		);
 		/* height: 150px; */
 		padding: 10px 15px;
 		display: flex;
@@ -39,8 +47,15 @@ export const Wrapper = styled.nav`
 			margin-bottom: 10px;
 			color: black;
 			text-decoration: none;
+			transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+			&:hover {
+				color: #4d4dff;
+			}
 			.profile-link {
 				color: black;
+				&:hover {
+					color: #4d4dff;
+				}
 			}
 		}
 	}
