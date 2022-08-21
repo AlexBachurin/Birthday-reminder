@@ -21,4 +21,19 @@ export const Wrapper = styled.article`
 		align-items: center;
 		font-size: 18px;
 	}
+	.btn-container {
+		padding-bottom: 30px;
+	}
+	.delete-btn {
+		min-width: 120px;
+		border-radius: 10px;
+		outline: none;
+		cursor: pointer;
+		background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+		-webkit-transition: 0.3s ease-in-out all;
+		transition: 0.3s ease-in-out all;
+		:hover {
+			background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+		}
+	}
 `;

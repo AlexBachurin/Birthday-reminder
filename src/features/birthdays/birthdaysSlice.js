@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchBirthdaysThunk, updateBirthdaysThunk } from "./birthdaysThunk";
+import {
+	deleteBirthdayThunk,
+	fetchBirthdaysThunk,
+	updateBirthdaysThunk,
+} from "./birthdaysThunk";
 
 const initialState = {
 	loading: false,
@@ -16,6 +20,11 @@ export const fetchBirthdays = createAsyncThunk(
 export const updateBirthdaysArr = createAsyncThunk(
 	"birthdays/updateBirthdays",
 	updateBirthdaysThunk
+);
+//delete single birthday
+export const deleteBirthday = createAsyncThunk(
+	"brithdays/deleteBirthday",
+	deleteBirthdayThunk
 );
 
 export const birthdaySlice = createSlice({
@@ -42,6 +51,17 @@ export const birthdaySlice = createSlice({
 			state.birthdays = action.payload;
 		},
 		[updateBirthdaysArr.rejected]: (state, action) => {
+			state.loading = false;
+			state.error = action.payload;
+		},
+		[deleteBirthday.pending]: (state) => {
+			state.loading = true;
+		},
+		[deleteBirthday.fulfilled]: (state, action) => {
+			state.loading = false;
+			state.birthdays = action.payload;
+		},
+		[deleteBirthday.rejected]: (state, action) => {
 			state.loading = false;
 			state.error = action.payload;
 		},

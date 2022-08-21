@@ -85,3 +85,13 @@ ul {
 	color: blue;
 	cursor: pointer;
 }
+.loading-container {
+	max-width: 150px;
+	min-height: 150px;
+	margin: 0 auto;
+	display: grid;
+	place-items: center;
+}
+.loading-icon {
+	font-size: 50px;
+}

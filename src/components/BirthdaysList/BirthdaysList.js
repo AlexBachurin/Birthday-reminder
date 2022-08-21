@@ -2,12 +2,15 @@ import React from "react";
 import { Wrapper } from "./Wrapper";
 import Birthday from "../Birthday/Birthday";
 import { useSelector } from "react-redux";
+import { LoadingOutlined } from "@ant-design/icons";
 const BirthdaysList = () => {
 	const { birthdays, loading } = useSelector((store) => store.birthdays);
 	return (
 		<>
 			{loading ? (
-				"Loading..."
+				<div className="loading-container">
+					<LoadingOutlined className="loading-icon" />
+				</div>
 			) : (
 				<Wrapper>
 					<div className="birthdays-select">

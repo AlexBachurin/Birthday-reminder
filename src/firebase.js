@@ -80,3 +80,22 @@ export const addNewBirthdayToDb = async (uid, personToAdd) => {
 		birthdaysArr: arrayUnion(personToAdd),
 	});
 };
+
+//remove item from array
+export const deleteBirthdayFromDb = async (uid, id) => {
+	const birthdaysRef = doc(db, "users", uid);
+	//get data first
+	const docSnap = await getDoc(birthdaysRef);
+
+	if (docSnap.exists()) {
+		const birthdays = docSnap.data().birthdaysArr;
+		console.log(birthdays);
+		//filter array to delete from array by provided id
+		await updateDoc(birthdaysRef, {
+			birthdaysArr: birthdays.filter((item) => item.id !== id),
+		});
+	} else {
+		// doc.data() will be undefined in this case
+		return null;
+	}
+};

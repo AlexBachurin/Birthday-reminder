@@ -24,6 +24,7 @@ const AddPersonModalForm = ({ closeFormModal }) => {
 			console.log("Success:", values);
 			const { name, prefix, phone } = values;
 			const newUser = {
+				id: new Date().getTime(),
 				name,
 				phoneNumber: `+${prefix}${phone}`,
 				photo: imageUrl
