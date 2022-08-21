@@ -5,13 +5,13 @@ import { Wrapper } from "./Wrapper";
 import AddPersonModalForm from "../../components/AddPersonModalForm/AddPersonModalForm";
 const MainPage = () => {
 	const [showFormModal, setShowFormModal] = useState(false);
-
 	const openFormModal = () => {
 		setShowFormModal(true);
 	};
 	const closeFormModal = () => {
 		setShowFormModal(false);
 	};
+
 	return (
 		<Wrapper>
 			<Navbar />

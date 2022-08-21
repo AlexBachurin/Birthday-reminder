@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.section`
 	display: flex;
 	flex-direction: column;
+	min-height: 200px;
 	.birthdays-select {
 		display: flex;
 		gap: 20px;
@@ -24,5 +25,8 @@ export const Wrapper = styled.section`
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 20px;
+	}
+	.empty-msg {
+		text-align: center;
 	}
 `;

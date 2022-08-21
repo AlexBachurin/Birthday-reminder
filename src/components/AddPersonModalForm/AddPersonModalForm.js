@@ -3,6 +3,8 @@ import { Button, DatePicker, Form, Input, Select } from "antd";
 import { Wrapper } from "./Wrapper";
 import { CloseOutlined } from "@ant-design/icons";
 import UploadButton from "../UploadButton/UploadButton";
+import { useDispatch, useSelector } from "react-redux";
+import { updateBirthdaysArr } from "../../features/birthdays/birthdaysSlice";
 
 const { Option } = Select;
 
@@ -11,6 +13,8 @@ const AddPersonModalForm = ({ closeFormModal }) => {
 	const [birthdayError, setBirthdayError] = useState(false);
 	//state for person image
 	const [imageUrl, setImageUrl] = useState();
+	const dispatch = useDispatch();
+	const { user } = useSelector((store) => store.user);
 	//submit
 	const onFinish = (values) => {
 		if (!birthDate) {
@@ -18,6 +22,18 @@ const AddPersonModalForm = ({ closeFormModal }) => {
 			setBirthdayError(true);
 		} else {
 			console.log("Success:", values);
+			const { name, prefix, phone } = values;
+			const newUser = {
+				id: new Date().getTime(),
+				name,
+				phoneNumber: `+${prefix}${phone}`,
+				photo: imageUrl
+					? imageUrl
+					: "https://res.cloudinary.com/dljezd6qv/image/upload/v1660756352/empty_user.png",
+				birthday: birthDate,
+			};
+			console.log(newUser);
+			dispatch(updateBirthdaysArr({ uid: user.uid, personObj: newUser }));
 		}
 	};
 

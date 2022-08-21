@@ -7,7 +7,7 @@ import {
 	signOut,
 } from "firebase/auth";
 import { getAuth } from "firebase/auth";
-import { app } from "../../firebase";
+import { app, createUserDocumentFromAuth } from "../../firebase";
 const google_provider = new GoogleAuthProvider();
 export const auth = getAuth(app);
 
@@ -24,8 +24,12 @@ export const loginUserWithGoogleThunk = async (_, thunkAPI) => {
 //registration
 export const createUserWithEmailAndPasswordThunk = async (values, thunkAPI) => {
 	try {
-		const { username, email, password } = values;
-		const res = await createUserWithEmailAndPassword(auth, email, password);
+		const { username } = values;
+		const res = await createUserWithEmailAndPassword(
+			auth,
+			values.email,
+			values.password
+		);
 		const user = res.user;
 		//if we getting back user update it immediately with provided username
 		if (user) {
@@ -33,7 +37,16 @@ export const createUserWithEmailAndPasswordThunk = async (values, thunkAPI) => {
 				displayName: username,
 			});
 		}
-		return user.providerData[0];
+		const { displayName, email, photoURL, uid } = res.user;
+		const newUser = {
+			displayName,
+			email,
+			photoURL,
+			uid,
+		};
+		//add user to collection in our db on registration
+		await createUserDocumentFromAuth(user);
+		return newUser;
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.code);
 	}
@@ -41,9 +54,19 @@ export const createUserWithEmailAndPasswordThunk = async (values, thunkAPI) => {
 //login with email and password
 export const signInWithEmailAndPasswordThunk = async (values, thunkAPI) => {
 	try {
-		const { email, password } = values;
-		const res = await signInWithEmailAndPassword(auth, email, password);
-		return res.user.providerData[0];
+		const res = await signInWithEmailAndPassword(
+			auth,
+			values.email,
+			values.password
+		);
+		const { displayName, email, photoURL, uid } = res.user;
+		const newUser = {
+			displayName,
+			email,
+			photoURL,
+			uid,
+		};
+		return newUser;
 	} catch (error) {
 		return thunkAPI.rejectWithValue(error.code);
 	}
