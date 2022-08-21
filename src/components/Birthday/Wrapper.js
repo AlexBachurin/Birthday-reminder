@@ -25,15 +25,17 @@ export const Wrapper = styled.article`
 		padding-bottom: 30px;
 	}
 	.delete-btn {
-		min-width: 120px;
+		min-width: 80px;
+		display: block;
 		border-radius: 10px;
+		margin: 0 auto;
 		outline: none;
 		cursor: pointer;
 		background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 		-webkit-transition: 0.3s ease-in-out all;
 		transition: 0.3s ease-in-out all;
 		:hover {
-			background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+			background: #ff8080;
 		}
 	}
 `;

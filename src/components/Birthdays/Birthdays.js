@@ -1,3 +1,4 @@
+import { LoadingOutlined } from "@ant-design/icons";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBirthdays } from "../../features/birthdays/birthdaysSlice";
@@ -17,7 +18,9 @@ const Birthdays = ({ openFormModal }) => {
 	return (
 		<Wrapper>
 			{isLoading ? (
-				"Loading..."
+				<div className="loading-container">
+					<LoadingOutlined className="loading-icon" />
+				</div>
 			) : (
 				<>
 					<h1 className="main-title">Birthdays Today</h1>
